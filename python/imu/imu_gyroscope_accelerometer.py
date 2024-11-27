@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import cv2
 import depthai as dai
 import time
@@ -38,28 +37,28 @@ with dai.Device(pipeline) as device:
     # Output queue for imu bulk packets
     imuQueue = device.getOutputQueue(name="imu", maxSize=50, blocking=False)
     baseTs = None
-    while True:
-        imuData = imuQueue.get()  # blocking call, will wait until a new data has arrived
 
-        imuPackets = imuData.packets
-        for imuPacket in imuPackets:
-            acceleroValues = imuPacket.acceleroMeter
-            gyroValues = imuPacket.gyroscope
+    try:
+        while True:
+            imuData = imuQueue.get()  # blocking call, will wait until a new data has arrived
 
-            acceleroTs = acceleroValues.getTimestampDevice()
-            gyroTs = gyroValues.getTimestampDevice()
-            if baseTs is None:
-                baseTs = acceleroTs if acceleroTs < gyroTs else gyroTs
-            acceleroTs = timeDeltaToMilliS(acceleroTs - baseTs)
-            gyroTs = timeDeltaToMilliS(gyroTs - baseTs)
+            imuPackets = imuData.packets
+            for imuPacket in imuPackets:
+                a = imuPacket.acceleroMeter
+                g = imuPacket.gyroscope
 
-            imuF = "{:.06f}"
-            tsF  = "{:.03f}"
+                acceleroTs = a.getTimestampDevice()
+                if baseTs is None:
+                    baseTs = acceleroTs
+                acceleroTs = timeDeltaToMilliS(acceleroTs - baseTs)
 
-            print(f"Accelerometer timestamp: {tsF.format(acceleroTs)} ms")
-            print(f"Accelerometer [m/s^2]: x: {imuF.format(acceleroValues.x)} y: {imuF.format(acceleroValues.y)} z: {imuF.format(acceleroValues.z)}")
-            print(f"Gyroscope timestamp: {tsF.format(gyroTs)} ms")
-            print(f"Gyroscope [rad/s]: x: {imuF.format(gyroValues.x)} y: {imuF.format(gyroValues.y)} z: {imuF.format(gyroValues.z)} ")
+                imuF = "{:9.6f}"
+                tsF  = "{:.3f}"
 
-        if cv2.waitKey(1) == ord('q'):
-            break
+                print(f"[ {tsF.format(acceleroTs)} msec ]----------------------------")
+                print(f"Accel [m/s^2]: x: {imuF.format(a.x)} y: {imuF.format(a.y)} z: {imuF.format(a.z)}")
+                print(f"Gyro  [rad/s]: x: {imuF.format(g.x)} y: {imuF.format(g.y)} z: {imuF.format(g.z)}")
+    except KeyboardInterrupt:
+        print("\rbye ...")
+
+
