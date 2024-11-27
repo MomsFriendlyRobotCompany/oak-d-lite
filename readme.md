@@ -1,5 +1,21 @@
 # oad-d lite
 
+[Luxonis pypi.org](https://pypi.org/user/luxonis/)
+
+```
+python3 -m venv venvs/oak
+changeenv oak
+pip install -U pip setuptools
+pip install depthai
+```
+
+## Optional
+
+```
+pip install opencv-contrib-python
+pip install depthai-viewer
+```
+
 # MIT License
 
 **Copyright (c) 2024 Mom's Friendly Robot Company**
