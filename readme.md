@@ -1,6 +1,7 @@
 # oad-d lite
 
-[Luxonis pypi.org](https://pypi.org/user/luxonis/)
+- [Luxonis pypi.org](https://pypi.org/user/luxonis/)
+- [depthai examples](https://docs.luxonis.com/software/depthai/examples/)
 
 ```
 python3 -m venv venvs/oak
