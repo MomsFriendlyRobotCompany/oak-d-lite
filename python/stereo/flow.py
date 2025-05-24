@@ -221,6 +221,15 @@ if __name__ == '__main__':
 
                 print("Motions:", motions_left)
                 cv2.imshow(left_window_name, left_frame)
+                key = cv2.waitKey(1)
+                
+                if (key == 27) or (key == ord('q')):
+                    print("closing...")
+                    break
                 
         except KeyboardInterrupt:
             print("\rbye ...")
+
+        finally:
+            # Close all OpenCV windows
+            cv2.destroyAllWindows()

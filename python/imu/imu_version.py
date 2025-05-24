@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import depthai as dai
-
+from thebrian.oak import imu_info
+from pprint import pprint
 """
 https://www.bosch-sensortec.com/products/motion-sensors/imus/bmi270/
 
@@ -16,7 +17,9 @@ frequency of ~250 Hz is set when the input is >400Hz.
 
 
 device = dai.Device()
+info = imu_info(device)
+pprint(info)
 
-imuType = device.getConnectedIMU()
-imuFirmwareVersion = device.getIMUFirmwareVersion()
-print(f"IMU type: {imuType}, firmware version: {imuFirmwareVersion}")
+# imuType = device.getConnectedIMU()
+# imuFirmwareVersion = device.getIMUFirmwareVersion()
+# print(f"IMU type: {imuType}, firmware version: {imuFirmwareVersion}")

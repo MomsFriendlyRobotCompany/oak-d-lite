@@ -2,3 +2,7 @@ build
 .DS_Store
 ._*
 __pycache__
+.ipynb_checkpoints
+images/
+*.mp4
+old

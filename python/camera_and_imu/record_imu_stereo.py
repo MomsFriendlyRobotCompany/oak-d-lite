@@ -22,14 +22,14 @@ xoutLeft = pipeline.create(dai.node.XLinkOut)
 xoutLeft.setStreamName('left')
 monoLeft = pipeline.create(dai.node.MonoCamera)
 monoLeft.setCamera("left")
-monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
+monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
 monoLeft.out.link(xoutLeft.input)
 
 xoutRight = pipeline.create(dai.node.XLinkOut)
 xoutRight.setStreamName('right')
 monoRight = pipeline.create(dai.node.MonoCamera)
 monoRight.setCamera("right")
-monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
+monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
 monoRight.out.link(xoutRight.input)
 
 # IMU
